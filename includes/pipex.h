@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/11 18:02:02 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/12 11:17:21 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_data
 /// initialisation struct ///
 void	ft_initialisation_struct(t_data *data, char **av, char **env);
 
-char	**ft_split(char *str);
+char	**ft_split(char *str, char separator);
+
+void	ft_free(t_data *data);
 
 #endif

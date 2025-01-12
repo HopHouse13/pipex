@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tool.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 15:11:31 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/12 11:07:07 by ubuntu           ###   ########.fr       */
+/*   Created: 2025/01/12 11:09:40 by ubuntu            #+#    #+#             */
+/*   Updated: 2025/01/12 11:53:05 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int main(int ac, char **av, char **envp)
+void	ft_free(t_data *data)
 {
-	t_data	data;
-	
-	if (ac == 5)
+	int	i;
+
+	i = -1;
+	if (data->cmd1 != NULL)
 	{
-		ft_initialisation_struct(&data, av, envp);
-		//if(ft_parsing_handle())
-		//ft_pipex();
+		if(data->cmd1->cmd != NULL)	
+		{
+			while(data->cmd1->cmd[++i])
+				free(data->cmd1->cmd[i]);
+			free(data->cmd1->cmd);
+		}
+		free(data->cmd1);
 	}
-	else
-		write(1, "Nombre d'arguments invalide", 27);
-	return (0);
+	i = -1;
+	if (data->cmd2 != NULL)
+	{
+		if(data->cmd2->cmd != NULL)	
+		{
+			while(data->cmd2->cmd[++i])
+				free(data->cmd2->cmd[i]);
+			free(data->cmd2->cmd);
+		}
+		free(data->cmd2);
+	}
 }

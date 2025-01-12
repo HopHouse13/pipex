@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pbret <pbret@student.42.fr>                +#+  +:+       +#+         #
+#    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/23 17:02:37 by ubuntu            #+#    #+#              #
-#    Updated: 2025/01/11 18:00:12 by pbret            ###   ########.fr        #
+#    Updated: 2025/01/12 11:17:58 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRCS_DIR	= srcs
 OBJ_DIR 	= obj_$(NAME)
 SRCS		= srcs/main.c \
 			srcs/init_struct.c \
-			srcs/split.c
+			srcs/split.c \
+			srcs/tool.c
 OBJS		= $(SRCS:$(SRCS_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC			= cc
 RM			= rm -rf

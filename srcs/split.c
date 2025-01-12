@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:21:00 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/11 17:22:56 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/12 11:06:10 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_strncpy(char *str1, char *str2, int nb)
 	return ;
 }
 
-int	ft_count_words(char *str)
+int	ft_count_words(char *str, char separator)
 {
 	int		i;
 	int		word;
@@ -37,9 +37,9 @@ int	ft_count_words(char *str)
 	flag = 0;
 	while (str[i])
 	{
-		while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		while (str[i] == separator)
 			i++;
-		while (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i])
+		while (str[i] != separator && str[i])
 		{
 			flag = 1;
 			i++;
@@ -53,7 +53,7 @@ int	ft_count_words(char *str)
 	return (word);
 }
 
-char	**ft_initialisation_tab(char **tab, char *str)
+char	**ft_initialisation_tab(char **tab, char *str, char separator)
 {
 	int		i;
 	int		start;
@@ -64,10 +64,10 @@ char	**ft_initialisation_tab(char **tab, char *str)
 	start = 0;
 	while (str[i])
 	{
-		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
+		while (str[i] && str[i] == separator)
 			i++;
 		start = i;
-		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
+		while (str[i] && str[i] != separator)
 			i++;
 		if (i > start)
 		{
@@ -80,15 +80,15 @@ char	**ft_initialisation_tab(char **tab, char *str)
 	return (tab);
 }
 
-char	**ft_split(char *str)
+char	**ft_split(char *str, char separator)
 {
 	char	**tab;
 	int		nb_words;
 
-	nb_words = ft_count_words(str);
+	nb_words = ft_count_words(str, separator);
 	tab = malloc(sizeof(char *) * (nb_words + 1));
 	if (!tab)
 		return (NULL);
-	ft_initialisation_tab(tab, str);
+	ft_initialisation_tab(tab, str, separator);
 	return (tab);
 }
