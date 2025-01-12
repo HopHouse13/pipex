@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/12 11:17:21 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/12 12:01:31 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct s_data
     char    **env;
     char    *file1;
     char    *file2;
-    t_cmd    *cmd1;
-    t_cmd    *cmd2;
+    t_cmd    cmd1;
+    t_cmd    cmd2;
 }           t_data;
 
 /// initialisation struct ///
