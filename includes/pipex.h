@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/12 12:01:31 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/13 12:43:47 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <errno.h>
-# include <stdlib.h>
+# include <unistd.h>	//write
+// # include <stdio.h>
+// # include <errno.h>
+# include <stdlib.h>	// malloc
+# include <fcntl.h>		// open
+
 
 # define RESET "\033[0m"
 # define BLACK "\033[30m"
@@ -28,17 +30,20 @@
 # define CYAN "\033[36m"
 # define WHITE "\033[37m"
 
+# define FAILURE 0;
+# define SUCCESS 1;
+
 typedef struct s_cmd
 {
 	char	*path;
 	char	**cmd;
-}				t_cmd;
+}			t_cmd;
 
 typedef struct s_data
 {
     char    **env;
-    char    *file1;
-    char    *file2;
+    char    *infile;
+    char    *outfile;
     t_cmd    cmd1;
     t_cmd    cmd2;
 }           t_data;
@@ -49,5 +54,10 @@ void	ft_initialisation_struct(t_data *data, char **av, char **env);
 char	**ft_split(char *str, char separator);
 
 void	ft_free(t_data *data);
+
+/// error_handle ///
+void	ft_errors_handle(int code_error);
+int		ft_parsing_handle(t_data *data);
+int		ft_is_it_directory(t_data *data);
 
 #endif

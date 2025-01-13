@@ -1,6 +1,8 @@
 {
 	"editor.insertSpaces": false,
 	"files.associations": {
-		"pipex.h": "c"
+		"pipex.h": "c",
+		"errno.h": "c",
+		"stdlib.h": "c"
 	}
 }

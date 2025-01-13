@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   messages_errors_handle.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 15:11:31 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/13 11:27:43 by pbret            ###   ########.fr       */
+/*   Created: 2025/01/13 11:10:46 by pbret             #+#    #+#             */
+/*   Updated: 2025/01/13 11:23:01 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+# include "../includes/pipex.h"
 
-int main(int ac, char **av, char **envp)
+void	ft_errors_handle(int code_error)
 {
-	t_data	data;
-	
-	if (ac == 5)
-	{
-		ft_initialisation_struct(&data, av, envp);
-		if(ft_parsing_handle(&data))
-		//ft_pipex();
-		ft_free(&data);
-	}
-	else
-		ft_errors_handle(0);
-	return (0);
+	if (code_error == 0)
+		write(1, "Nombre d'arguments invalide\n", 28);
 }
