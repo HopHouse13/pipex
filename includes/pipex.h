@@ -6,14 +6,14 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/13 15:20:17 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/13 18:47:17 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <unistd.h>	// write
+# include <unistd.h>	// write; pipe; fork
 # include <stdio.h>		// perror
 # include <errno.h>
 # include <stdlib.h>	// malloc
@@ -37,6 +37,7 @@ typedef struct s_cmd
 {
 	char	*path;
 	char	**cmd;
+	pid_t	pid;
 }			t_cmd;
 
 typedef struct s_data
@@ -52,12 +53,15 @@ typedef struct s_data
 void	ft_initialisation_struct(t_data *data, char **av, char **env);
 char	**ft_split(char *str, char separator);
 
+/// pipex ///
+void	ft_start_pipex(t_data data);
+
 /// tools ///
 void	ft_free(t_data *data);
 
 /// error_handle ///
 int		ft_parsing_handle(t_data *data);
-int		ft_is_it_directory(t_data *data);
+int		ft_is_it_a_directory(t_data *data);
 int		ft_is_it_openable(t_data *data);
 int		ft_is_it_empty(t_data *data);
 

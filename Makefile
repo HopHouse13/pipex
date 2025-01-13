@@ -6,7 +6,7 @@
 #    By: pbret <pbret@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/23 17:02:37 by ubuntu            #+#    #+#              #
-#    Updated: 2025/01/13 14:45:20 by pbret            ###   ########.fr        #
+#    Updated: 2025/01/13 15:46:56 by pbret            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS		= srcs/main.c \
 			srcs/split.c \
 			srcs/messages_errors_handle.c \
 			srcs/tool.c \
-			srcs/pasing_handle.c
+			srcs/pasing_handle.c \
+			srcs/pipex.c
 OBJS		= $(SRCS:$(SRCS_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC			= cc
 RM			= rm -rf

@@ -6,7 +6,7 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:31:15 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/13 14:06:55 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/13 18:15:22 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_parsing_handle(t_data *data)
 	int	code_error;
 	
 	code_error = -1;
-	if (!ft_is_it_directory(data))
+	if (!ft_is_it_a_directory(data))
 		code_error = 1;
 	if (!ft_is_it_openable(data))
 		code_error = 2;
@@ -32,7 +32,7 @@ int	ft_parsing_handle(t_data *data)
 }
 
 
-int ft_is_it_directory(t_data *data)
+int ft_is_it_a_directory(t_data *data)
 {
 	int	fd_infile;
 	

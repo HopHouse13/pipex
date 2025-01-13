@@ -6,7 +6,7 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:10:46 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/13 15:15:05 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/13 17:51:12 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,7 @@ void	ft_errors_handle(int code_error)
 		perror("Fichier non ouvrable ");
 	if (code_error == 3)
 		write(2, "Fichier vide\n", 13);
+	if (code_error == 4)
+		perror("pipe ");
+
 }
