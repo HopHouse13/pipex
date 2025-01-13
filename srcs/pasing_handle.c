@@ -6,7 +6,7 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:31:15 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/13 12:43:01 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/13 14:06:55 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	ft_parsing_handle(t_data *data)
 		code_error = 2;
 	if (!ft_is_it_empty(data))
 		code_error = 3;
+	if (code_error != -1)
+	{
+		ft_errors_handle(code_error);
+		return (FAILURE);
+	}
 	return (SUCCESS);
 }
 

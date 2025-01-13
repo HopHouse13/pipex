@@ -6,7 +6,7 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:31 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/13 11:27:43 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/13 15:18:48 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int ac, char **av, char **envp)
 	{
 		ft_initialisation_struct(&data, av, envp);
 		if(ft_parsing_handle(&data))
-		//ft_pipex();
+			ft_pipex(&data);
 		ft_free(&data);
 	}
 	else
