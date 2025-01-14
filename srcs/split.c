@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:21:00 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/12 11:06:10 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/14 16:52:11 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_count_words(char *str, char separator)
 	return (word);
 }
 
-char	**ft_initialisation_tab(char **tab, char *str, char separator)
+char	**ft_init_tab(char **tab, char *str, char separator)
 {
 	int		i;
 	int		start;
@@ -72,6 +72,8 @@ char	**ft_initialisation_tab(char **tab, char *str, char separator)
 		if (i > start)
 		{
 			tab[j] = malloc(sizeof(char) * (i - start + 1));
+			if (!tab[j])
+				return (NULL);
 			ft_strncpy(tab[j], &str[start], (i - start));
 			j++;
 		}
@@ -89,6 +91,8 @@ char	**ft_split(char *str, char separator)
 	tab = malloc(sizeof(char *) * (nb_words + 1));
 	if (!tab)
 		return (NULL);
-	ft_initialisation_tab(tab, str, separator);
+	ft_init_tab(tab, str, separator);
+	if (!tab)
+		return (NULL);
 	return (tab);
 }

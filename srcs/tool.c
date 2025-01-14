@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tool.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:09:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/12 12:06:45 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/14 11:35:17 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	ft_free(t_data *data)
 			free(data->cmd2.cmd[i]);
 		free(data->cmd2.cmd);
 	}
+	//close infile and outfile if > -1
 }
