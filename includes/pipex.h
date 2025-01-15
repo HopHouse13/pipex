@@ -6,18 +6,18 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/14 17:46:19 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/15 18:24:51 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <unistd.h>	// write; pipe; fork
-# include <stdio.h>		// perror
+# include <unistd.h>	// write; pipe; fork; access;
+# include <stdio.h>		// perror;
 # include <errno.h>
-# include <stdlib.h>	// malloc
-# include <fcntl.h>		// open
+# include <stdlib.h>	// malloc;
+# include <fcntl.h>		// open;
 
 
 # define RESET "\033[0m"
@@ -51,19 +51,21 @@ typedef struct s_data
     t_cmd	cmd2;
 }           t_data;
 
-/// initialisation struct ///
-char	**ft_split(char *str, char separator);
+/// initialisation ///
+int		ft_init_files(t_data *data, char **av);
+int		ft_init_cmds(t_data *data, char **av, char **env);
+int		ft_is_directory(t_data *data);
+int		ft_is_openable(t_data *data);
+int		ft_build_path(t_data *data, char **env);
+
 
 /// pipex ///
 void	ft_start_pipex(t_data *data);
 
 /// tools ///
+char	**ft_split(char *str, char separator);
 void	ft_free(t_data *data);
-
-/// error_handle ///
-int		ft_init_files(t_data *data, char ** av);
-int		ft_is_directory(t_data *data);
-int		ft_is_openable(t_data *data);
+void	ft_close_fd(t_data *data);
 
 /// error_message ///
 void	ft_errors_handle(int code_error);
