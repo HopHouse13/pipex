@@ -6,7 +6,7 @@
 #    By: pbret <pbret@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/23 17:02:37 by ubuntu            #+#    #+#              #
-#    Updated: 2025/01/16 16:06:28 by pbret            ###   ########.fr        #
+#    Updated: 2025/01/16 17:19:00 by pbret            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ SRCS_DIR	= srcs
 OBJ_DIR 	= obj_$(NAME)
 SRCS		= srcs/main.c \
 			srcs/initialisation.c \
-			srcs/split.c \
 			srcs/messages_errors_handle.c \
 			srcs/tool.c \
 			srcs/pipex.c

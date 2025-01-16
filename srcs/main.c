@@ -6,7 +6,7 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:31 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/15 17:33:46 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:38:38 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int ac, char **av, char **env)
 	
 	if (ac == 5)
 	{
-		if (ft_init_files(&data, av) || ft_init_cmds(&data, av, env))
+		if (!ft_init_files(&data, av) || !ft_init_cmds(&data, av, env))
 			printf("WIN\n");//ft_start_pipex(&data);
 		else
 			printf("LOOSE\n");

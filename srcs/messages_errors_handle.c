@@ -6,7 +6,7 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:10:46 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/15 16:25:50 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:51:16 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_errors_handle(int code_error)
 	if (code_error == 2)
 		perror("Fichier non ouvrable ");
 	if (code_error == 3)
-		write(2, "Variables d'environnement inexistants\n", 38);
+		write(2, "PATH inexistant dans les variables d'environnement\n", 51);
 	if (code_error == 4)
 		perror("Erreur d'initialisation de commande ");
 	if (code_error == 5)
