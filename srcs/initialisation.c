@@ -3,14 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:03:40 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/16 18:20:00 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/17 18:26:58 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/pipex.h"
+
+int	ft_init_cmds(t_data *data, char **av)
+{
+	if (ft_if_only_space(av[2]))
+		if (ft_cmd_space(&data->cmd1.cmd))
+			return (FAILURE);
+	else
+	{
+		data->cmd1.cmd = ft_split(av[2], ' ');
+		if (!data->cmd1.cmd)
+			return (FAILURE);
+	}	
+	if (ft_if_only_space(av[3]))
+		if (ft_cmd_space(&data->cmd2.cmd))
+			return (FAILURE);
+	else
+	{
+		data->cmd2.cmd = ft_split(av[3], ' ');
+		if (!data->cmd1.cmd)
+			return (FAILURE);
+	}
+	return (SUCCESS);
+}
+/* int ft_init_paths(t_data *data, char **env)
+{
+	data->env = env;
+	if (ft_find_env_path(data))
+		return (FAILURE);
+	if (data->cmd1.cmd[0][0] == '/')
+		if(access(data->cmd1.cmd[0], F_OK | X_OK) < 0)
+			return (ft_errors_handle(5), FAILURE);
+		else
+			data->cmd1.path = data->cmd1.cmd;
+	if (data->cmd2.cmd[0][0] == '/')
+		if(access(data->cmd2.cmd[0], F_OK | X_OK) < 0)
+			return (ft_errors_handle(5), FAILURE);
+	return (SUCCESS);
+} */
 
 int	ft_init_files(t_data *data, char **av)
 {
@@ -22,23 +60,14 @@ int	ft_init_files(t_data *data, char **av)
 		return (FAILURE);
 	return (SUCCESS);
 }
-int	ft_init_cmds(t_data *data, char **av, char **env)
-{
-	data->cmd1.cmd = ft_split(av[2], ' ');
-	data->cmd2.cmd = ft_split(av[3], ' ');
-	if (!data->cmd1.cmd | !data->cmd1.cmd)
-		return (ft_errors_handle(4), FAILURE);
-	data->env = env;
-	if (!ft_build_path(data))
-		return (FAILURE);
-	return (SUCCESS);
-}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+// FILES //
 
 int ft_is_directory(t_data *data) // si c'est un dossier
 {
 	data->fd_infile = open(data->infile, __O_DIRECTORY);
-	data->fd_outfile = open(data->outfile, __O_DIRECTORY); // JE CROIS QUE CELA N'EST PAS UTILSE -> si il ya un repertoire du meme nom en s'en fiche non???????
+	 data->fd_outfile = open(data->outfile, __O_DIRECTORY); // JE CROIS QUE CELA N'EST PAS UTILSE -> si il ya un repertoire du meme nom en s'en fiche non???????
 	if (data->fd_infile != -1 || data->fd_outfile != -1)
 		return (ft_errors_handle(1), FAILURE);
 	return (SUCCESS);
@@ -54,6 +83,10 @@ int ft_is_openable(t_data *data)
 		return (ft_errors_handle(2), FAILURE);
 	return (SUCCESS);
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// PATHS //
+
 int	ft_find_env_path(t_data *data)
 {
 	int i;
@@ -65,20 +98,43 @@ int	ft_find_env_path(t_data *data)
 	ft_errors_handle(3);
 	return (FAILURE);
 }
-int	ft_build_path(t_data *data)
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// CMDS //
+
+int	ft_if_only_space(char *str)
 {
-	if (ft_find_env_path(data))
-		return (FAILURE);
-	if (data->cmd1.cmd[0][0] == '/')
-		if(access(data->cmd1.cmd[0], F_OK | X_OK) < 0)
-			return (ft_errors_handle(5), FAILURE);
-		else
-			data->cmd1.path = data->cmd1.cmd;
-	if (data->cmd2.cmd[0][0] == '/')
-		if(access(data->cmd2.cmd[0], F_OK | X_OK) < 0)
-			return (ft_errors_handle(5), FAILURE);
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if(str[i] != ' ')
+			return (FAILURE);
 	return (SUCCESS);
 }
+int ft_cmd_space(char ***space_cmd)
+{
+	*space_cmd = malloc(2 * sizeof(char*));
+	if (!*space_cmd)
+	{
+		*space_cmd = NULL;
+		ft_errors_handle(4);
+		return (FAILURE);
+	}
+	(*space_cmd)[1] = NULL;
+	(*space_cmd)[0] = malloc(2 * sizeof(char));
+	if (!(*space_cmd)[0])
+	{
+		(*space_cmd)[0][0] = '\0';
+		ft_errors_handle(4);
+		return (FAILURE);
+	}
+	(*space_cmd)[0][0] = ' ';
+	(*space_cmd)[0][1] = '\0';
+	return (SUCCESS);
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
 // execve(char *chemin, char **args_pour_executable, char **env) ????
 
 

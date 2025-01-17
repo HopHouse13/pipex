@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/16 18:21:57 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/17 18:05:42 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,21 @@ typedef struct s_data
 }           t_data;
 
 /// initialisation ///
+int		ft_init_cmds(t_data *data, char **av);
+int 	ft_init_paths(t_data *data, char **env);
 int		ft_init_files(t_data *data, char **av);
-int		ft_init_cmds(t_data *data, char **av, char **env);
+
 int		ft_is_directory(t_data *data);
 int		ft_is_openable(t_data *data);
 int		ft_find_env_path(t_data *data);
 
 int		ft_build_path(t_data *data);
 
+int		ft_if_only_space(char *str);
+int 	ft_cmd_space(char ***space_cmd);
 
 /// pipex ///
-void	ft_start_pipex(t_data *data);
+//void	ft_start_pipex(t_data *data);
 
 /// tools ///
 void	ft_free(t_data *data);

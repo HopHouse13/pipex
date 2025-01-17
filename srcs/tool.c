@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   tool.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:09:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/15 17:33:17 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/17 16:31:02 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void		ft_free(t_data *data)
+void	ft_free(t_data *data)
 {
 	int	i;
-
+	ft_printf("cmd1->'%s'\ncmd2->'%s'\n", data->cmd1.cmd,data->cmd2.cmd);
 	i = -1;
 	if(data->cmd1.cmd)	
 	{
@@ -24,20 +24,19 @@ void		ft_free(t_data *data)
 		free(data->cmd1.cmd);
 	}
 	i = -1;
-	if(data->cmd2.cmd)	
+	if(data->cmd2.cmd)
 	{
 		while(data->cmd2.cmd[++i])
 			free(data->cmd2.cmd[i]);
 		free(data->cmd2.cmd);
 	}
-	//close infile and outfile if > -1
 }
 
 void	ft_close_fd(t_data *data)
 {
-	if(data->fd_infile)
+	if(data->fd_infile > -1)
 		close(data->fd_infile);
-	if(data->fd_outfile)
+	if(data->fd_outfile > -1)
 		close(data->fd_outfile);
 }
 
