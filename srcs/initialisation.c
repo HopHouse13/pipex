@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:03:40 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/17 18:26:58 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/17 21:02:11 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 int	ft_init_cmds(t_data *data, char **av)
 {
-	if (ft_if_only_space(av[2]))
-		if (ft_cmd_space(&data->cmd1.cmd))
+	if (!ft_if_only_space(av[2]))
+	{
+		if (ft_cmd_space(data, 1))
 			return (FAILURE);
+	}
 	else
 	{
 		data->cmd1.cmd = ft_split(av[2], ' ');
 		if (!data->cmd1.cmd)
 			return (FAILURE);
 	}	
-	if (ft_if_only_space(av[3]))
-		if (ft_cmd_space(&data->cmd2.cmd))
+	if (!ft_if_only_space(av[3]))
+	{
+		if (ft_cmd_space(data, 2))
 			return (FAILURE);
+	}
 	else
 	{
 		data->cmd2.cmd = ft_split(av[3], ' ');
@@ -34,21 +38,28 @@ int	ft_init_cmds(t_data *data, char **av)
 	}
 	return (SUCCESS);
 }
-/* int ft_init_paths(t_data *data, char **env)
+
+int ft_init_paths(t_data *data, char **env)
 {
 	data->env = env;
 	if (ft_find_env_path(data))
 		return (FAILURE);
 	if (data->cmd1.cmd[0][0] == '/')
-		if(access(data->cmd1.cmd[0], F_OK | X_OK) < 0)
+	{
+		if(access(data->cmd1.cmd[0], F_OK | X_OK) < 0) // F_ok -> si la commande existe | X_ok -> si il est executable
 			return (ft_errors_handle(5), FAILURE);
 		else
-			data->cmd1.path = data->cmd1.cmd;
+			data->cmd1.path = data->cmd1.cmd[0];
+	}
 	if (data->cmd2.cmd[0][0] == '/')
+	{
 		if(access(data->cmd2.cmd[0], F_OK | X_OK) < 0)
 			return (ft_errors_handle(5), FAILURE);
+		else
+			data->cmd2.path = data->cmd2.cmd[0];
+	}
 	return (SUCCESS);
-} */
+}
 
 int	ft_init_files(t_data *data, char **av)
 {
@@ -100,7 +111,6 @@ int	ft_find_env_path(t_data *data)
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // CMDS //
-
 int	ft_if_only_space(char *str)
 {
 	int	i;
@@ -111,25 +121,31 @@ int	ft_if_only_space(char *str)
 			return (FAILURE);
 	return (SUCCESS);
 }
-int ft_cmd_space(char ***space_cmd)
+int ft_cmd_space(t_data *data, int flag)
 {
-	*space_cmd = malloc(2 * sizeof(char*));
-	if (!*space_cmd)
+	char **tmp;
+
+	tmp = malloc(2 * sizeof(char*));
+	if (!tmp)
 	{
-		*space_cmd = NULL;
+		tmp = NULL;
 		ft_errors_handle(4);
 		return (FAILURE);
 	}
-	(*space_cmd)[1] = NULL;
-	(*space_cmd)[0] = malloc(2 * sizeof(char));
-	if (!(*space_cmd)[0])
+	tmp[1] = NULL;
+	tmp[0] = malloc(2 * sizeof(char));
+	if (!tmp[0])
 	{
-		(*space_cmd)[0][0] = '\0';
+		tmp[0][0] = '\0';
 		ft_errors_handle(4);
 		return (FAILURE);
 	}
-	(*space_cmd)[0][0] = ' ';
-	(*space_cmd)[0][1] = '\0';
+	tmp[0][0] = ' ';
+	tmp[0][1] = '\0';
+	if(flag == 1)
+		data->cmd1.cmd = tmp;
+	else
+		data->cmd2.cmd = tmp;
 	return (SUCCESS);
 }
 

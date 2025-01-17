@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:09:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/17 16:31:02 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/17 20:08:19 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_free(t_data *data)
 {
 	int	i;
-	ft_printf("cmd1->'%s'\ncmd2->'%s'\n", data->cmd1.cmd,data->cmd2.cmd);
+	
 	i = -1;
 	if(data->cmd1.cmd)	
 	{

@@ -6,22 +6,12 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:31 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/17 16:01:54 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/17 19:30:46 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-/* int	ft_pipex(t_data *data)
-{
-	int	pipefd[2];
-
-	if (pipe(pipefd) < 0)
-	{
-		perror("Erreur avec pipe");
-		return (1);
-	}
-} */
 
 int main(int ac, char **av/* , char **env */)
 {
