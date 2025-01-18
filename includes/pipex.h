@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/17 19:53:31 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/18 20:06:48 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <errno.h>
 # include <stdlib.h>	// malloc;
 # include <fcntl.h>		// open;
+//# include<sys/types.h> 	// pid_t; 
 
 
 # define RESET "\033[0m"
@@ -46,6 +47,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
     char	**env;
+	char 	**all_paths;
     char	*infile;
     char	*outfile;
 	int		fd_infile;
@@ -54,25 +56,30 @@ typedef struct s_data
     t_cmd	cmd2;
 }           t_data;
 
-/// initialisation ///
-int		ft_init_cmds(t_data *data, char **av);
-int		ft_init_paths(t_data *data, char **env);
-int		ft_init_files(t_data *data, char **av);
+/// Initialisation de la structure ///
+void	ft_init_values_struct(t_data *data);
 
-int		ft_is_directory(t_data *data);
-int		ft_is_openable(t_data *data);
-
-int		ft_find_env_path(t_data *data);
-int		ft_build_path(t_data *data);
-
+/// Management des commandes ///
+int		ft_cmds_manag(t_data *data, char **av);
 int		ft_if_only_space(char *str);
 int 	ft_cmd_space(t_data *data, int flag);
+
+/// Management des PATHS ///
+int		ft_paths_manag(t_data *data, char **env);
+int		ft_find_paths_line(t_data *data);
+int		ft_build_all_paths(t_data *data, char *paths_line);
+int		ft_build_cmd_path(t_data *data);
+
+/// Management des fichiers ///
+int		ft_files_manag(t_data *data, char **av);
+int		ft_is_directory(t_data *data);
+int		ft_is_openable(t_data *data);
 
 
 /// pipex ///
 //void	ft_start_pipex(t_data *data);
 
-/// tools ///
+/// Free & close ///
 void	ft_free(t_data *data);
 void	ft_close_fd(t_data *data);
 

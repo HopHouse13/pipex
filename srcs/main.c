@@ -6,22 +6,23 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:31 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/17 19:30:46 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/18 17:40:47 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
 
-int main(int ac, char **av/* , char **env */)
+int main(int ac, char **av, char **env)
 {
 	t_data	data;
 	
 	if (ac == 5)
 	{
-		if (!ft_init_cmds(&data, av) &&
-			/* !ft_init_paths(&data, env) && */
-			!ft_init_files(&data, av))
+		ft_init_values_struct(&data);
+		if (!ft_cmds_manag(&data, av) &&
+			!ft_paths_manag(&data, env) &&
+			!ft_files_manag(&data, av))
 			printf("WIN\n");//ft_start_pipex(&data);
 		else
 			printf("LOOSE\n");

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pbret <pbret@student.42.fr>                +#+  +:+       +#+         #
+#    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/23 17:02:37 by ubuntu            #+#    #+#              #
-#    Updated: 2025/01/16 17:19:00 by pbret            ###   ########.fr        #
+#    Updated: 2025/01/18 19:12:53 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,13 @@ NAME		= pipex
 SRCS_DIR	= srcs
 OBJ_DIR 	= obj_$(NAME)
 SRCS		= srcs/main.c \
-			srcs/initialisation.c \
-			srcs/messages_errors_handle.c \
-			srcs/tool.c \
-			srcs/pipex.c
+			srcs/initialisation_struct.c \
+			srcs/errors_messages.c \
+			srcs/handle_cmds.c \
+			srcs/handle_paths.c \
+			srcs/handle_files.c \
+			srcs/exec.c \
+			srcs/free_and_close.c
 OBJS		= $(SRCS:$(SRCS_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC			= cc
 RM			= rm -rf
@@ -48,8 +51,8 @@ clean:
 			@echo "\033[36m""Répertoire $(OBJ_DIR) supprimé.""\033[0m"
 
 fclean:		clean
-			make fclean -sC ./includes/libft
-			make fclean -sC ./includes/printf
+			$(RM) $(LIBFT_AR)
+			$(RM) $(PRINTF_AR)
 			$(RM) $(NAME)
 			@echo "\033[36m""Exécutable $(NAME) supprimé.""\033[0m"
 
