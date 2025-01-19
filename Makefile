@@ -6,7 +6,7 @@
 #    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/23 17:02:37 by ubuntu            #+#    #+#              #
-#    Updated: 2025/01/18 19:12:53 by ubuntu           ###   ########.fr        #
+#    Updated: 2025/01/19 19:57:14 by ubuntu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ OBJ_DIR 	= obj_$(NAME)
 SRCS		= srcs/main.c \
 			srcs/initialisation_struct.c \
 			srcs/errors_messages.c \
-			srcs/handle_cmds.c \
-			srcs/handle_paths.c \
-			srcs/handle_files.c \
+			srcs/management_cmds.c \
+			srcs/management_paths.c \
+			srcs/management_files.c \
 			srcs/exec.c \
 			srcs/free_and_close.c
 OBJS		= $(SRCS:$(SRCS_DIR)/%.c=$(OBJ_DIR)/%.o)

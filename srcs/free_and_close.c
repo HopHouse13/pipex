@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:09:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/18 18:01:40 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/19 20:50:59 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ void	ft_free(t_data *data)
 			free(data->cmd2.cmd[i]);
 		free(data->cmd2.cmd);
 	}
+	i = -1;
+	if(data->all_paths)
+	{
+		while(data->all_paths[++i])
+			free(data->all_paths[i]);
+		free(data->all_paths);
+	}
+	if(data->cmd1.path)
+		free(data->cmd1.path);
+	if(data->cmd2.path)
+		free(data->cmd2.path);
 }
 
 void	ft_close_fd(t_data *data)

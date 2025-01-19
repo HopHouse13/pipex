@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:38:27 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/18 20:03:26 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/19 18:30:02 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ int	ft_cmds_manag(t_data *data, char **av)
 	if (!ft_if_only_space(av[2]))
 	{
 		if (ft_cmd_space(data, 1))
-			return (FAILURE);
+			return (ft_errors_handle(1), FAILURE);
 	}
 	else
 	{
 		data->cmd1.cmd = ft_split(av[2], ' ');
 		if (!data->cmd1.cmd)
-			return (FAILURE);
+			return (ft_errors_handle(1), FAILURE);
 	}	
 	if (!ft_if_only_space(av[3]))
 	{
 		if (ft_cmd_space(data, 2))
-			return (FAILURE);	
+			return (ft_errors_handle(1), FAILURE);	
 	}
 	else
 	{
 		data->cmd2.cmd = ft_split(av[3], ' ');
 		if (!data->cmd1.cmd)
-			return (FAILURE);
+			return (ft_errors_handle(1), FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -56,7 +56,6 @@ int ft_cmd_space(t_data *data, int flag)
 	if (!tmp)
 	{
 		tmp = NULL;
-		ft_errors_handle(4);
 		return (FAILURE);
 	}
 	tmp[1] = NULL;
@@ -64,7 +63,6 @@ int ft_cmd_space(t_data *data, int flag)
 	if (!tmp[0])
 	{
 		tmp[0][0] = '\0';
-		ft_errors_handle(4);
 		return (FAILURE);
 	}
 	tmp[0][0] = ' ';

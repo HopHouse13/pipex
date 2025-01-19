@@ -6,12 +6,14 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:31 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/18 17:40:47 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/19 20:55:17 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
+// commande definitily lost :
+// valgrind --leak-check=full --track-origins=yes ./pipex "fichier_test_avec_droits" "ls" "grep a" "outfile.txt"
 
 int main(int ac, char **av, char **env)
 {
@@ -23,9 +25,9 @@ int main(int ac, char **av, char **env)
 		if (!ft_cmds_manag(&data, av) &&
 			!ft_paths_manag(&data, env) &&
 			!ft_files_manag(&data, av))
-			printf("WIN\n");//ft_start_pipex(&data);
+			printf("\nWIN\n");//ft_start_pipex(&data);
 		else
-			printf("LOOSE\n");
+			printf("\nLOOSE\n");
 		ft_free(&data);
 		ft_close_fd(&data);
 	}

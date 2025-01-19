@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/19 12:50:21 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/19 20:55:16 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "./libft/includes/libft.h"
 # include "./printf/includes/ft_printf.h"
 
-# include <unistd.h>	// write; pipe; fork; access;
+# include <unistd.h>	// write; pipe; fork; access; execve;
 # include <stdio.h>		// perror;
 # include <errno.h>
 # include <stdlib.h>	// malloc;
@@ -66,9 +66,12 @@ int 	ft_cmd_space(t_data *data, int flag);
 
 /// Management des PATHS ///
 int		ft_paths_manag(t_data *data, char **env);
-int		ft_build_paths_tab(t_data *data);
-int		ft_build_all_paths(t_data *data, char *paths_line);
-int		ft_build_cmd_path(t_data *data);
+int		ft_path_cmd(t_data *data, int flag);
+int		ft_get_paths_tab(t_data *data);
+int		ft_get_absolute_path(t_data *data, int flag);
+int		ft_get_paths_tab(t_data *data);
+int		ft_build_all_paths_tab(t_data *data, char *paths_line);
+int		ft_get_full_cmd(t_data *data, int flag);
 
 /// Management des fichiers ///
 int		ft_files_manag(t_data *data, char **av);
