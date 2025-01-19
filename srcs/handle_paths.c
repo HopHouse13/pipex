@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:38:44 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/18 20:09:36 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/19 13:02:04 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 int ft_paths_manag(t_data *data, char **env)
 {
 	data->env = env;
-/* 	int i = -1; // POUR IMPRIMER ENV
-	while (data->env[++i])
-		ft_printf("env >>> %s\n", data->env[i]);
-	ft_printf ("\n////////////////////////////////////\n"); */
-	if (ft_find_paths_line(data))
-		return (FAILURE);
+
 	if (data->cmd1.cmd[0][0] == '/')
 	{
 		if(access(data->cmd1.cmd[0], F_OK | X_OK) < 0) // F_ok -> si la commande existe | X_ok -> si il est executable
@@ -28,32 +23,37 @@ int ft_paths_manag(t_data *data, char **env)
 		else
 			data->cmd1.path = data->cmd1.cmd[0];
 	}
-	/* else
-		ft_build_cmd_path(data); */
-	if (data->cmd2.cmd[0][0] == '/')
+	else
+	{
+		if (ft_build_paths_tab(data))
+			return (FAILURE);
+		ft_build_cmd_path(data);
+	}
+/* 	if (data->cmd2.cmd[0][0] == '/')
 	{
 		if(access(data->cmd2.cmd[0], F_OK | X_OK) < 0)
 			return (ft_errors_handle(5), FAILURE);
 		else
 			data->cmd2.path = data->cmd2.cmd[0];
 	}
-/* 	else
-		ft_build_cmd_path(data); */
-	return (SUCCESS);
+ 	else
+		ft_build_cmd_path(data);
+	return (SUCCESS); */
 }
 
-int	ft_find_paths_line(t_data *data)
+int	ft_build_paths_tab(t_data *data)
 {
 	int i;
 
 	i = -1;
 	while (data->env[++i])
 	{
-		if(!ft_strncmp(data->env[i], "PATH=", 5))
+		if(!ft_strncmp(data->env[i], "PATH=", 5)) // trouver dans env si il ya la line PATH=
 		{
-			if (!ft_build_all_paths(data, data->env[i]))
-				return (FAILURE);
-			return(SUCCESS);
+			if (!ft_build_all_paths(data, data->env[i])) // mettre dans data->all_paths chaque path (sans le nom de la variable)
+				return (SUCCESS);
+			else
+				ft_errors_handle(4); // erreur d'initialisation tab_paths
 		}
 	}
 	ft_errors_handle(3);
@@ -62,27 +62,21 @@ int	ft_find_paths_line(t_data *data)
 
 int	ft_build_all_paths(t_data *data, char *paths_line)
 {
-	char *only_paths;
-	int	i;
-	int	j;
+	char	*only_paths;
+	int		i;
 	
 	i = 0;
 	while (paths_line[i] != '=')
 		i++; // i = 4 alors que "PATH=" = 5
-	only_paths = malloc((ft_strlen(paths_line) - (i + 1) + 1) * sizeof(char)); // "i + 1" pour avoir le bon nombre de caractere du nom de la variable.
+	only_paths = ft_substr(paths_line, (i + 1), ft_strlen(paths_line));
 	if (!only_paths)
 		return (FAILURE);
-	only_paths[ft_strlen(paths_line) - (i + 1)] = '\0';
-	j = -1;
-	while (paths_line[i])
-		only_paths[++j] = paths_line[++i];
 	data->all_paths = ft_split(only_paths, ':');
-	if (data->all_paths == NULL)
-		return(FAILURE);
-	free(only_paths);
-	ft_printf("paths_value = %s\n", data->all_paths);
-	//only_paths = ft_supp_variable_name(paths_line)
-	//data->all_paths = ft_split();
+	if (!data->all_paths)
+		return (FAILURE);
+	/* i = -1;
+	while (data->all_paths[++i])
+		ft_printf("PATH >>> %s\n", data->all_paths[i]); */
 	return (SUCCESS);
 }
 

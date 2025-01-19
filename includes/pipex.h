@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/18 20:06:48 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/19 12:50:21 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int 	ft_cmd_space(t_data *data, int flag);
 
 /// Management des PATHS ///
 int		ft_paths_manag(t_data *data, char **env);
-int		ft_find_paths_line(t_data *data);
+int		ft_build_paths_tab(t_data *data);
 int		ft_build_all_paths(t_data *data, char *paths_line);
 int		ft_build_cmd_path(t_data *data);
 
