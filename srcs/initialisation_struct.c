@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation_struct.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 17:42:42 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/19 18:27:09 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/20 10:59:22 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	ft_init_values_struct(t_data *data)
 {
 	data->env = NULL;
-	data->all_paths = NULL;
+	data->paths_tab = NULL;
 	data->infile = NULL;
 	data->outfile = NULL;
 	data->fd_infile = -1;

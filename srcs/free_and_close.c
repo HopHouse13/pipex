@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_close.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 11:09:40 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/19 20:50:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/20 14:32:19 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ void	ft_free(t_data *data)
 	
 	i = -1;
 	if(data->cmd1.cmd)	
-	{
 		while(data->cmd1.cmd[++i])
 			free(data->cmd1.cmd[i]);
-		free(data->cmd1.cmd);
-	}
+	free(data->cmd1.cmd);
 	i = -1;
 	if(data->cmd2.cmd)
 	{
@@ -31,15 +29,15 @@ void	ft_free(t_data *data)
 		free(data->cmd2.cmd);
 	}
 	i = -1;
-	if(data->all_paths)
+	if(data->paths_tab)
 	{
-		while(data->all_paths[++i])
-			free(data->all_paths[i]);
-		free(data->all_paths);
+		while(data->paths_tab[++i])
+			free(data->paths_tab[i]);
+		free(data->paths_tab);
 	}
-	if(data->cmd1.path)
+	if(data->cmd1.path != NULL)
 		free(data->cmd1.path);
-	if(data->cmd2.path)
+	if(data->cmd2.path != NULL)
 		free(data->cmd2.path);
 }
 

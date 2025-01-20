@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_cmds.c                                      :+:      :+:    :+:   */
+/*   management_cmds.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:38:27 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/19 18:30:02 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/20 14:18:34 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_cmds_manag(t_data *data, char **av)
 	else
 	{
 		data->cmd2.cmd = ft_split(av[3], ' ');
-		if (!data->cmd1.cmd)
+		if (!data->cmd2.cmd)
 			return (ft_errors_handle(1), FAILURE);
 	}
 	return (SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/19 20:55:16 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/20 18:51:24 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
     char	**env;
-	char 	**all_paths;
+	char 	**paths_tab;
     char	*infile;
     char	*outfile;
 	int		fd_infile;
@@ -66,11 +66,9 @@ int 	ft_cmd_space(t_data *data, int flag);
 
 /// Management des PATHS ///
 int		ft_paths_manag(t_data *data, char **env);
+void	ft_build_paths_tab(t_data *data);
 int		ft_path_cmd(t_data *data, int flag);
-int		ft_get_paths_tab(t_data *data);
 int		ft_get_absolute_path(t_data *data, int flag);
-int		ft_get_paths_tab(t_data *data);
-int		ft_build_all_paths_tab(t_data *data, char *paths_line);
 int		ft_get_full_cmd(t_data *data, int flag);
 
 /// Management des fichiers ///
@@ -78,9 +76,8 @@ int		ft_files_manag(t_data *data, char **av);
 int		ft_is_directory(t_data *data);
 int		ft_is_openable(t_data *data);
 
-
 /// pipex ///
-//void	ft_start_pipex(t_data *data);
+void	ft_exec_pipex(t_data *data);
 
 /// Free & close ///
 void	ft_free(t_data *data);

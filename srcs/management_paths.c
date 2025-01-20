@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_paths.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:38:44 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/19 20:53:00 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:31:47 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,61 @@
 int ft_paths_manag(t_data *data, char **env)
 {
 	data->env = env;
+	ft_build_paths_tab(data);
 	if (!ft_path_cmd(data, 1) && !ft_path_cmd(data, 2))
 		return (SUCCESS);
 	else
 		return (FAILURE);
 }
+void	ft_build_paths_tab(t_data *data)
+{
+	char	*only_paths;
+	int		i;
+	int		j;
+	
+	i = -1;
+	while (data->env[++i])
+		if(!ft_strncmp(data->env[i], "PATH=", 5)) 
+		{
+			j = 0;
+			while (data->env[i][j] != '=')
+				j++; // j = 4 alors que "PATH=" = 5
+			only_paths = ft_substr(data->env[i], (j + 1), (ft_strlen(data->env[i]) - (j + 1)));
+			if (!only_paths)
+				return ;
+			data->paths_tab = ft_split(only_paths, ':');
+			free (only_paths);
+			return ;
+		}
+}
+
 int	ft_path_cmd(t_data *data, int flag)
 {
 	if(data->cmd1.cmd[0][0] == '/') // check si la cmd est un chemin absolu.
 	{
 		if(ft_get_absolute_path(data, flag)) // si la commande est accessible -> on sort du if et on passe a la cmd2. Si c'est pas accessible avec ce chemin absolu -> on tente avec les chemins du PATH.  
-		{
-			if (!ft_get_paths_tab(data)) // Recuperation de la variable "PATH" en env. si Pas possible -> FAILURE
+		{ft_printf("value pointeur paths_tab: %p\n", data->paths_tab);
+			if (data->paths_tab != NULL) // Recuperation de la variable "PATH" en env. si Pas possible -> FAILURE
+			{
 				if(!ft_get_full_cmd(data, flag)) // fabrication de la commande complete valide avec le chemin absdolu.
 					return (SUCCESS);
-			return (FAILURE); // fin du programme si fail
-		}	
+				return (ft_errors_handle(3), FAILURE);
+			}
+			return (ft_errors_handle(2), FAILURE); // fin du programme si fail
+		}
 	}
 	else
 	{
-		if (!ft_get_paths_tab(data))
-			if (!ft_get_full_cmd(data, 1)) // 1 -> flag pour savoir si on traitre de la premiere ou 2eme cmd.
+		if (data->paths_tab != NULL)
+		{
+			if (!ft_get_full_cmd(data, flag)) // 1 -> flag pour savoir si on traitre de la premiere ou 2eme cmd.
 				return (SUCCESS);
-		return (FAILURE);
+			return (ft_errors_handle(3), FAILURE);
+		}
+		return (ft_errors_handle(2), FAILURE);
 	}
 	return (SUCCESS);
 }
-
 
 int	ft_get_absolute_path(t_data *data, int flag)
 {
@@ -62,42 +90,6 @@ int	ft_get_absolute_path(t_data *data, int flag)
 	return (SUCCESS);
 }
 
-int	ft_get_paths_tab(t_data *data)
-{
-	int i;
-
-	i = -1;
-	while (data->env[++i])
-	{
-		if(!ft_strncmp(data->env[i], "PATH=", 5)) // trouver dans env si il ya la line PATH=
-		{
-			if (!ft_build_all_paths_tab(data, data->env[i])) // mets dans data->all_paths chaque path (sans le nom de la variable)
-				return (SUCCESS);
-			else
-				return (ft_errors_handle(3), FAILURE); // erreur d'initialisation tab_paths
-		}
-	}
-	return (ft_errors_handle(2), FAILURE); // pas trouve "PATH=" dans env
-}
-
-int	ft_build_all_paths_tab(t_data *data, char *paths_line)
-{
-	char	*only_paths;
-	int		i;
-	
-	i = 0;
-	while (paths_line[i] != '=')
-		i++; // i = 4 alors que "PATH=" = 5
-	only_paths = ft_substr(paths_line, (i + 1), ft_strlen(paths_line));
-	if (!only_paths)
-		return (FAILURE);
-	data->all_paths = ft_split(only_paths, ':');
-	free (only_paths);
-	if (!data->all_paths)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
 int	ft_get_full_cmd(t_data *data, int flag)
 {
 	char	*path_with_slash;
@@ -110,9 +102,9 @@ int	ft_get_full_cmd(t_data *data, int flag)
 	else
 		current_cmd = &(data->cmd2);
 	i = -1;
-	while (data->all_paths[++i])
+	while (data->paths_tab[++i])
 		{
-			path_with_slash = ft_strjoin(data->all_paths[i], "/");
+			path_with_slash = ft_strjoin(data->paths_tab[i], "/");
 			if (!path_with_slash)
 				break;
 			full_path = ft_strjoin(path_with_slash, current_cmd->cmd[0]);
@@ -120,7 +112,7 @@ int	ft_get_full_cmd(t_data *data, int flag)
 			if (!full_path)
 				break;
 			if (access(full_path, F_OK | X_OK) < 0)
-				free(full_path);
+					free(full_path);
 			else
 				return (current_cmd->path = full_path, SUCCESS);
 		}
