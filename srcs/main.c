@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:31 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/20 18:51:35 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/21 17:44:39 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@
 
 void FT_ASUPP_PINTF(t_data *data)
 {
-	int			c = 1;
-	int 		i = -1;
-	ft_printf("infile : %s\noutfile : %s\ncmd1_path : %s\ncmd2_path : %s\n", data->infile, data->outfile, data->cmd1.path, data->cmd2.path);//ft_start_pipex(&data);
-			while (data->paths_tab[++i])
-				ft_printf("path_tab_N%d -> %s\n", c, data->paths_tab[i]), c++;
-			i = -1;
-			c = 1;
-			while (data->cmd1.cmd[++i])
-				ft_printf("cmd1_N%d -> %s\n", c, data->cmd1.cmd[i]), c++;
-			i = -1;
-			c = 1;
-			while (data->cmd2.cmd[++i])
-				ft_printf("cmd2_N%d -> %s\n", c, data->cmd2.cmd[i]), c++;
+	int	c = 1;
+	int	i = -1;
+	printf("infile : %s\noutfile : %s\ncmd1_path : %s\ncmd2_path : %s\n", data->infile, data->outfile, data->cmd1.path, data->cmd2.path);//ft_start_pipex(&data);
+	while (data->paths_tab[++i])
+		printf("path_tab_N%d -> %s\n", c, data->paths_tab[i]), c++;
+	i = -1;
+	c = 1;
+	while (data->cmd1.cmd[++i])
+		printf("cmd1_N%d -> %s\n", c, data->cmd1.cmd[i]), c++;
+	i = -1;
+	c = 1;
+	while (data->cmd2.cmd[++i])
+		printf("cmd2_N%d -> %s\n", c, data->cmd2.cmd[i]), c++;
 }
 
 int main(int ac, char **av, char **env)

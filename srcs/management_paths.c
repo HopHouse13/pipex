@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   management_paths.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:38:44 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/20 16:31:47 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/21 14:55:34 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_build_paths_tab(t_data *data)
 			j = 0;
 			while (data->env[i][j] != '=')
 				j++; // j = 4 alors que "PATH=" = 5
-			only_paths = ft_substr(data->env[i], (j + 1), (ft_strlen(data->env[i]) - (j + 1)));
+			only_paths = ft_substr(data->env[i], (j + 1), (ft_strlen(data->env[i])));
 			if (!only_paths)
 				return ;
 			data->paths_tab = ft_split(only_paths, ':');

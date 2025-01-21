@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/20 18:51:24 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/21 15:17:44 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>	// malloc;
 # include <fcntl.h>		// open;
 //# include<sys/types.h> 	// pid_t; 
-
+# include <sys/wait.h>	// waitpid;
 
 # define RESET "\033[0m"
 # define BLACK "\033[30m"
@@ -76,8 +76,10 @@ int		ft_files_manag(t_data *data, char **av);
 int		ft_is_directory(t_data *data);
 int		ft_is_openable(t_data *data);
 
-/// pipex ///
+/// Exec ///
 void	ft_exec_pipex(t_data *data);
+void	ft_first_cmd(t_data *data, int *pipe_fd);
+void	ft_second_cmd(t_data *data, int *pipe_fd);
 
 /// Free & close ///
 void	ft_free(t_data *data);
