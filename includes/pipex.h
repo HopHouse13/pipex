@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 15:11:59 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/21 15:17:44 by ubuntu           ###   ########.fr       */
+/*   Updated: 2025/01/22 17:53:35 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <errno.h>
 # include <stdlib.h>	// malloc;
 # include <fcntl.h>		// open;
-//# include<sys/types.h> 	// pid_t; 
 # include <sys/wait.h>	// waitpid;
 
 # define RESET "\033[0m"
@@ -46,15 +45,15 @@ typedef struct s_cmd
 
 typedef struct s_data
 {
-    char	**env;
-	char 	**paths_tab;
-    char	*infile;
-    char	*outfile;
+	char	**env;
+	char	**paths_tab;
+	char	*infile;
+	char	*outfile;
 	int		fd_infile;
 	int		fd_outfile;
-    t_cmd	cmd1;
-    t_cmd	cmd2;
-}           t_data;
+	t_cmd	cmd1;
+	t_cmd	cmd2;
+}			t_data;
 
 /// Initialisation de la structure ///
 void	ft_init_values_struct(t_data *data);
@@ -62,14 +61,14 @@ void	ft_init_values_struct(t_data *data);
 /// Management des commandes ///
 int		ft_cmds_manag(t_data *data, char **av);
 int		ft_if_only_space(char *str);
-int 	ft_cmd_space(t_data *data, int flag);
+int		ft_cmd_space(t_data *data, int flag);
 
 /// Management des PATHS ///
 int		ft_paths_manag(t_data *data, char **env);
 void	ft_build_paths_tab(t_data *data);
 int		ft_path_cmd(t_data *data, int flag);
-int		ft_get_absolute_path(t_data *data, int flag);
-int		ft_get_full_cmd(t_data *data, int flag);
+int		ft_check_absolute_path(t_data *data, int flag);
+int		ft_build_path(t_data *data, int flag);
 
 /// Management des fichiers ///
 int		ft_files_manag(t_data *data, char **av);
@@ -82,7 +81,9 @@ void	ft_first_cmd(t_data *data, int *pipe_fd);
 void	ft_second_cmd(t_data *data, int *pipe_fd);
 
 /// Free & close ///
-void	ft_free(t_data *data);
+void	ft_master_free_and_close(t_data *data);
+void	ft_free_tab(t_data *data);
+void	ft_free_double_tab(t_data *data);
 void	ft_close_fd(t_data *data);
 
 /// error_message ///

@@ -6,11 +6,11 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:38:27 by ubuntu            #+#    #+#             */
-/*   Updated: 2025/01/20 14:18:34 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/22 13:46:56 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/pipex.h"
+#include "../includes/pipex.h"
 
 int	ft_cmds_manag(t_data *data, char **av)
 {
@@ -28,7 +28,7 @@ int	ft_cmds_manag(t_data *data, char **av)
 	if (!ft_if_only_space(av[3]))
 	{
 		if (ft_cmd_space(data, 2))
-			return (ft_errors_handle(1), FAILURE);	
+			return (ft_errors_handle(1), FAILURE);
 	}
 	else
 	{
@@ -38,21 +38,23 @@ int	ft_cmds_manag(t_data *data, char **av)
 	}
 	return (SUCCESS);
 }
+
 int	ft_if_only_space(char *str)
 {
 	int	i;
 
 	i = -1;
 	while (str[++i])
-		if(str[i] != ' ')
+		if (str[i] != ' ')
 			return (FAILURE);
 	return (SUCCESS);
 }
-int ft_cmd_space(t_data *data, int flag)
-{
-	char **tmp;
 
-	tmp = malloc(2 * sizeof(char*));
+int	ft_cmd_space(t_data *data, int flag)
+{
+	char	**tmp;
+
+	tmp = malloc(2 * sizeof(char *));
 	if (!tmp)
 	{
 		tmp = NULL;
@@ -67,10 +69,9 @@ int ft_cmd_space(t_data *data, int flag)
 	}
 	tmp[0][0] = ' ';
 	tmp[0][1] = '\0';
-	if(flag == 1)
+	if (flag == 1)
 		data->cmd1.cmd = tmp;
 	else
 		data->cmd2.cmd = tmp;
 	return (SUCCESS);
 }
-

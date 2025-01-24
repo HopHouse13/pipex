@@ -6,36 +6,34 @@
 /*   By: pbret <pbret@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:10:46 by pbret             #+#    #+#             */
-/*   Updated: 2025/01/20 20:29:15 by pbret            ###   ########.fr       */
+/*   Updated: 2025/01/23 13:14:31 by pbret            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/pipex.h"
+#include "../includes/pipex.h"
 
 void	ft_errors_handle(int code_error)
 {
 	if (code_error == 0)
-		write(2, "Nombre d'arguments invalide\n", 28);
+		write(2, RED"Nombre d'arguments invalide.\n"RESET, 36);
 	if (code_error == 1)
-		perror("Erreur d'initialisation commande ");
+		perror(RED"Erreur d'initialisation commande "RESET);
 	if (code_error == 2)
-		write(2, "Erreur de recupération de la variable d'env. PATH.\n", 51);
+		write(2, RED"Erreur de recupération de la variable PATH.\n"RESET, 50);
 	if (code_error == 3)
-		perror("Erreur d'initialisation du path ");
+		perror(RED"Erreur d'accès à la commande "RESET);
 	if (code_error == 4)
-		perror("Erreur d'accès à la commande ");
+		write(2, RED"Le fichier d'entrée est un repertoire.\n"RESET, 46);
 	if (code_error == 5)
-		write(2,"Le fichier d'entrée est un repertoire.\n", 39);
+		perror(RED"Erreur d'accès au fichier "RESET);
 	if (code_error == 6)
-		perror("Erreur d'accès au fichier d'entrée  ");
+		perror(RED"Erreur d'initialisation du pipe "RESET);
 	if (code_error == 7)
-		perror("Erreur d'initialisation du pipe  ");
+		perror(RED"Erreur de la creation du premier processus enfant "RESET);
 	if (code_error == 8)
-		perror("Erreur lors de la creation du premier processus	enfant ");
+		perror(RED"Erreur de la creation du second processus enfant "RESET);
 	if (code_error == 9)
-		perror("Erreur lors de la creation du second processus enfant ");
+		perror(RED"Erreur de redirection de commande "RESET);
 	if (code_error == 10)
-		perror("Erreur de redirection de commande ");
-	if (code_error == 11)
-		perror("Erreur d'execution de commande ");
+		perror(RED"Erreur d'execution de commande "RESET);
 }
